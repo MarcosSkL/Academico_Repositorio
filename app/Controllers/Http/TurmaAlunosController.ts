@@ -4,7 +4,7 @@ import TurmaAluno from 'App/Models/TurmaAluno'
 
 export default class TurmaAlunosController {
   index (){
-    return TurmaAluno.all()
+    return TurmaAluno.query().paginate(1)
   }
   store ({request}){
     const dados = request.only(['turmaId', 'alunoId'])

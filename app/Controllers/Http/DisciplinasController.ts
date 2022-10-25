@@ -4,7 +4,7 @@ import Disciplina from "App/Models/Disciplina"
 
 export default class DiciplinasController {
     index(){
-        return Disciplina.all()
+        return Disciplina.query().paginate(1)
     }
 
     store( {request} ){
@@ -27,7 +27,7 @@ export default class DiciplinasController {
     async update( {request} ) {
         const id = request.param('id')
         const disciplina = await Disciplina.findOrFail(id)
-        const dados = request.only(["nome", "duracao", "modalidade"])
+        const dados = request.only(["nome", "curso_id"])
         disciplina.merge(dados)
         return disciplina.save()
 
