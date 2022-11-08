@@ -24,8 +24,13 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
+Route.post('/users', 'UsersController.store').middleware('auth')
 
-Route.resource('/cursos', 'CursosController').apiOnly()
+Route.post('/login', 'UsersController.login')
+
+Route.group(() => {
+
+  Route.resource('/cursos', 'CursosController').apiOnly()
 
 Route.resource('/disciplinas', 'DisciplinasController').apiOnly()
 
@@ -38,3 +43,5 @@ Route.resource('/Salas', 'SalasController').apiOnly()
 Route.resource('/TurmaAluno', 'TurmaAlunosController').apiOnly()
 
 Route.resource('/Alunos', 'AlunosController').apiOnly()
+
+}).middleware('auth')
